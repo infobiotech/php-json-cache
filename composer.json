@@ -1,5 +1,5 @@
 {
-  "name": "infobiotech/php-json.cache",
+  "name": "infobiotech/php-json-cache",
   "description": "JSON-based PSR-16 cache implementation.",
   "type": "library",
   "keywords": [
