@@ -5,7 +5,8 @@
  * @author Alessandro Raffa, Infobiotech S.r.l. <a.raffa@infobiotech.net>
  * @copyright (c) 2014-2017, Infobiotech S.r.l.
  * @license http://mit-license.org/
- * @uses ...
+ * @uses league/flysystem
+ * @uses psr/simple-cache
  */
 namespace Infobiotech;
 /*
@@ -14,7 +15,7 @@ namespace Infobiotech;
 use \Psr\SimpleCache\CacheInterface;
 use \League\Flysystem\Filesystem;
 /**
- * JsonCache Class
+ * JSON-based PSR-16 cache implementation.
  *
  * @author Alessandro Raffa, Infobiotech S.r.l. <a.raffa@infobiotech.net>
  */
