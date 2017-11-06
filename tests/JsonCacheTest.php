@@ -7,7 +7,7 @@ namespace Infobiotech;
  *
  * @author Alessandro Raffa, Infobiotech S.r.l. <a.raffa@infobiotech.net>
  */
-class JsonCacheTest extends \PHPUnit_Framework_TestCase
+class JsonCacheTest extends \PHPUnit\Framework\TestCase
 {
 
   public function testSet()
