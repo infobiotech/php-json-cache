@@ -60,7 +60,7 @@ We accept contributions via Pull Requests on [Github](https://github.com/infobio
 4. **Document any change in behaviour** - Make sure the [README.md](README.md) and any other relevant documentation are kept up-to-date.
 5. **Add tests** - Your patch won't be accepted if it doesn't have tests.
 6. **Ensure tests pass!** - Please run the tests (see below) before submitting your pull request, and make sure they pass. We won't accept a patch until all tests pass.
-7. **Ensure no coding standards violations** - Please run PHP Code Sniffer using the PSR-2 standard (see below) before submitting your pull request. A violation will cause the build to fail, so please make sure there are no violations. We can't accept a patch if the build fails.
+7. **Ensure no coding standards violations** - Please run PHP Code Sniffer using the PSR-2 standard (see [Running PHP Code Sniffer](https://github.com/infobiotech/php-json-cache#running-php-code-sniffer)) before submitting your pull request. A violation will cause the build to fail, so please make sure there are no violations. We can't accept a patch if the build fails.
 8. **Commit** your changes (`git commit -am 'Add some fooBar'`)
 9. Try to **follow [SemVer](http://semver.org/)**. Randomly breaking public APIs is not an option.
 10. Send **coherent history** - Make sure each individual commit in your pull request is meaningful. If you had to make multiple intermediate commits while developing, please squash them before submitting.
