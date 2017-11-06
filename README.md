@@ -40,7 +40,7 @@ composer require infobiotech/php-json-cache
 
 * [PHP-FIG PSR-16](http://www.php-fig.org/psr/psr-16/): a common interface for caching libraries.
 * [Psr\SimpleCache](https://github.com/php-fig/simple-cache): a repository that holds all interfaces related to PSR-16.
-* [League\Flysystem](https://flysystem.thephpleague.com/): a filesystem abstraction which allows you to easily swap out a local filesystem for a remote one.
+* [League\Flysystem](https://flysystem.thephpleague.com/): a filesystem abstraction that allows to easily swap out a local filesystem for a remote one.
 
 ## Contributing
 
