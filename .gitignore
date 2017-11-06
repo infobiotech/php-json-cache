@@ -43,5 +43,5 @@ bh_unicode_properties.cache
 ### https://packagecontrol.io/packages/sublime-github
 GitHub.sublime-settings
 ### others
-myNamespace.json
-phpJsonCache.json
+*myNamespace.json
+*phpJsonCache.json
