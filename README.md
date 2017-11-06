@@ -2,6 +2,8 @@
 
 A JSON-based PSR-16 cache implementation.
 
+[![Build Status](https://travis-ci.org/infobiotech/php-json-cache.svg?branch=master)](https://travis-ci.org/infobiotech/php-json-cache)
+
 Built with:
 * [PHP-FIG PSR-16](http://www.php-fig.org/psr/psr-16/): a common interface for caching libraries.
 * [Psr\SimpleCache](https://github.com/php-fig/simple-cache): a repository that holds all interfaces related to PSR-16.
