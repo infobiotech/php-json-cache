@@ -8,44 +8,54 @@
  * @uses league/flysystem
  * @uses psr/simple-cache
  */
+
 namespace Infobiotech;
+
 /*
  *
  */
+
 use \Psr\SimpleCache\CacheInterface;
 use \League\Flysystem\Filesystem;
+
 /**
  * JSON-based PSR-16 cache implementation.
  *
  * @author Alessandro Raffa, Infobiotech S.r.l. <a.raffa@infobiotech.net>
  */
-class JsonCache implements CacheInterface {
+class JsonCache implements CacheInterface
+{
   /*
    *
    */
   const FILED_VALUE      = 'value';
   const FILED_EXPIRATION = 'expiration';
+
   /*
    *
    */
-  const DEFAULT_TTL      = 1200;
+  const DEFAULT_TTL = 1200;
+
   /**
    *
    * @var \League\Flysystem\Filesystem
    */
   protected $filesystem;
+
   /**
    *
    * @var string
    */
   protected $namespace;
+
   /**
    *
    * @param \League\Flysystem\AdapterInterface $filesystemAdapter
    * @param string $namespace
    * @return JsonCache
    */
-  public function __construct(\League\Flysystem\AdapterInterface $filesystemAdapter, $namespace) {
+  public function __construct(\League\Flysystem\AdapterInterface $filesystemAdapter, $namespace)
+  {
     /*
      *
      */
@@ -53,12 +63,13 @@ class JsonCache implements CacheInterface {
     /*
      *
      */
-    $this->namespace  = $namespace . '.json';
+    $this->namespace  = $namespace.'.json';
     /*
      *
      */
     return $this;
   }
+
   /**
    * Fetches a value from the cache.
    *
@@ -72,7 +83,8 @@ class JsonCache implements CacheInterface {
    *
    * @todo Implement better $key validation and filtering
    */
-  public function get($key, $default = null) {
+  public function get($key, $default = null)
+  {
     $value = $default;
     if (!is_string($this->filterValidateKey($key))) {
       throw new \Psr\SimpleCache\InvalidArgumentException();
@@ -85,6 +97,7 @@ class JsonCache implements CacheInterface {
     }
     return $value;
   }
+
   /**
    * Persists data in the cache, uniquely referenced by a key with an optional expiration TTL time.
    *
@@ -101,7 +114,8 @@ class JsonCache implements CacheInterface {
    *
    * @todo Implement better $key validation and filtering
    */
-  public function set($key, $value, $ttl = null) {
+  public function set($key, $value, $ttl = null)
+  {
     if (!is_string($this->filterValidateKey($key))) {
       throw new \Psr\SimpleCache\InvalidArgumentException();
     }
@@ -110,12 +124,12 @@ class JsonCache implements CacheInterface {
     }
     $data       = $this->getDataFromStorage();
     $data[$key] = [
-      self::FILED_VALUE      => $value,
-      self::FILED_EXPIRATION => microtime(true) + (float) $ttl,
+        self::FILED_VALUE => $value,
+        self::FILED_EXPIRATION => microtime(true) + (float) $ttl,
     ];
-    $this->saveDataToStorage($data);
-    return null;
+    return $this->saveDataToStorage($data);
   }
+
   /**
    * Delete an item from the cache by its unique key.
    *
@@ -126,7 +140,8 @@ class JsonCache implements CacheInterface {
    * @throws \Psr\SimpleCache\InvalidArgumentException
    *   MUST be thrown if the $key string is not a legal value.
    */
-  public function delete($key) {
+  public function delete($key)
+  {
     if (!is_string($this->filterValidateKey($key))) {
       throw new \Psr\SimpleCache\InvalidArgumentException();
     }
@@ -136,14 +151,17 @@ class JsonCache implements CacheInterface {
     }
     return $this->saveDataToStorage($data);
   }
+
   /**
    * Wipes clean the entire cache's keys.
    *
    * @return bool True on success and false on failure.
    */
-  public function clear() {
+  public function clear()
+  {
     return $this->deleteStorage();
   }
+
   /**
    * Obtains multiple cache items by their unique keys.
    *
@@ -156,7 +174,8 @@ class JsonCache implements CacheInterface {
    *   MUST be thrown if $keys is neither an array nor a Traversable,
    *   or if any of the $keys are not a legal value.
    */
-  public function getMultiple($keys, $default = null) {
+  public function getMultiple($keys, $default = null)
+  {
     if (!is_array($keys)) {
       throw new \Psr\SimpleCache\InvalidArgumentException();
     }
@@ -166,6 +185,7 @@ class JsonCache implements CacheInterface {
     }
     return $values;
   }
+
   /**
    * Persists a set of key => value pairs in the cache, with an optional TTL.
    *
@@ -180,7 +200,8 @@ class JsonCache implements CacheInterface {
    *   MUST be thrown if $values is neither an array nor a Traversable,
    *   or if any of the $values are not a legal value.
    */
-  public function setMultiple($values, $ttl = null) {
+  public function setMultiple($values, $ttl = null)
+  {
     $failure = false;
     if (!is_array($values)) {
       throw new \Psr\SimpleCache\InvalidArgumentException();
@@ -192,6 +213,7 @@ class JsonCache implements CacheInterface {
     }
     return (bool) !$failure;
   }
+
   /**
    * Deletes multiple cache items in a single operation.
    *
@@ -203,7 +225,8 @@ class JsonCache implements CacheInterface {
    *   MUST be thrown if $keys is neither an array nor a Traversable,
    *   or if any of the $keys are not a legal value.
    */
-  public function deleteMultiple($keys) {
+  public function deleteMultiple($keys)
+  {
     $failure = false;
     if (!is_array($keys)) {
       throw new \Psr\SimpleCache\InvalidArgumentException();
@@ -215,6 +238,7 @@ class JsonCache implements CacheInterface {
     }
     return (bool) !$failure;
   }
+
   /**
    * Determines whether an item is present in the cache.
    *
@@ -230,7 +254,8 @@ class JsonCache implements CacheInterface {
    * @throws \Psr\SimpleCache\InvalidArgumentException
    *   MUST be thrown if the $key string is not a legal value.
    */
-  public function has($key) {
+  public function has($key)
+  {
     $has = false;
     if (!is_string($this->filterValidateKey($key))) {
       throw new \Psr\SimpleCache\InvalidArgumentException();
@@ -241,38 +266,46 @@ class JsonCache implements CacheInterface {
     }
     return $has;
   }
+
   /**
    *
    * @return array
    */
-  protected function getDataFromStorage() {
+  protected function getDataFromStorage()
+  {
     if (!$this->filesystem->has($this->namespace)) {
       $this->filesystem->write($this->namespace, json_encode([]));
     }
     return json_decode($this->filesystem->read($this->namespace), true);
   }
+
   /**
    *
    * @param array $data
    * @return boolean
    */
-  protected function saveDataToStorage($data) {
+  protected function saveDataToStorage($data)
+  {
     return (bool) $this->filesystem->put($this->namespace, json_encode($data));
   }
+
   /**
    *
    * @param array $data
    * @return boolean
    */
-  protected function deleteStorage() {
+  protected function deleteStorage()
+  {
     return (bool) $this->filesystem->delete($this->namespace);
   }
+
   /**
    *
    * @param string $key
    * @return string
    */
-  protected function filterValidateKey($key) {
+  protected function filterValidateKey($key)
+  {
     if (!is_string($key)) {
       throw new \Psr\SimpleCache\InvalidArgumentException();
     }
