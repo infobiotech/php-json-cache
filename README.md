@@ -2,6 +2,10 @@
 
 A JSON-based PSR-16 cache implementation.
 
+## Why JSON?
+
+Some web hosts do not support APCu, Memcached, Redis and other major cache drivers.
+
 ## Getting Started
 
 ### Prerequisites
