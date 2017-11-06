@@ -2,9 +2,18 @@
 
 A JSON-based PSR-16 cache implementation.
 
+Built with:
+* [PHP-FIG PSR-16](http://www.php-fig.org/psr/psr-16/): a common interface for caching libraries.
+* [Psr\SimpleCache](https://github.com/php-fig/simple-cache): a repository that holds all interfaces related to PSR-16.
+* [League\Flysystem](https://flysystem.thephpleague.com/): a filesystem abstraction that allows to easily swap out a local filesystem for a remote one.
+
 ## Why JSON?
 
-Some web hosts do not support APCu, Memcached, Redis and other major cache drivers.
+In some situations, remote web hosts do not support (or do not allow to install) major cache drivers.
+
+## Strategy
+
+TODO
 
 ## Getting Started
 
@@ -20,7 +29,17 @@ composer require infobiotech/php-json-cache
 
 ## Usage
 
-TODO
+**php-json-cache** implements [PSR-16](http://www.php-fig.org/psr/psr-16/) and thus provides a standardized API for storing and retrieving data.
+
+TODO add code examples
+
+## Security
+
+TODO Security considerations
+
+## Garbage collection
+
+TODO Garbage collection considerations
 
 ## Tests
 
@@ -35,12 +54,6 @@ $ ./vendor/bin/phpunit
 ``` bash
 $ ./vendor/bin/phpcs src --standard=psr2 -sp
 ```
-
-## Built With
-
-* [PHP-FIG PSR-16](http://www.php-fig.org/psr/psr-16/): a common interface for caching libraries.
-* [Psr\SimpleCache](https://github.com/php-fig/simple-cache): a repository that holds all interfaces related to PSR-16.
-* [League\Flysystem](https://flysystem.thephpleague.com/): a filesystem abstraction that allows to easily swap out a local filesystem for a remote one.
 
 ## Versioning
 
