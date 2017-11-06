@@ -36,13 +36,11 @@ Since this package is still in development / pre-release stage, to avoid the err
 Could not find package infobiotech/php-json-cache at any version for your minimum-stability (stable). Check the package spelling or your minimum-stability
 ```
 
-please add the following lines to your composer.json
+please add (or just check) the following lines to your composer.json
 
 ```
-{
   "prefer-stable": true,
   "minimum-stability": "dev"
-}
 ```
 
 ## Usage
