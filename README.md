@@ -3,6 +3,10 @@
 A JSON-based PSR-16 cache implementation.
 
 [![Build Status](https://travis-ci.org/infobiotech/php-json-cache.svg?branch=master)](https://travis-ci.org/infobiotech/php-json-cache)
+[![StyleCI](https://styleci.io/repos/109566219/shield?branch=master)](https://styleci.io/repos/109566219)
+[![codecov](https://codecov.io/gh/infobiotech/php-json-cache/branch/master/graph/badge.svg)](https://codecov.io/gh/infobiotech/php-json-cache)
+
+Badges are always relative to `master` branch.
 
 Built with:
 * [PHP-FIG PSR-16](http://www.php-fig.org/psr/psr-16/): a common interface for caching libraries.
