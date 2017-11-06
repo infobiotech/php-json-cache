@@ -2,11 +2,14 @@
 
 A JSON-based PSR-16 cache implementation.
 
-[![Build Status](https://travis-ci.org/infobiotech/php-json-cache.svg?branch=master)](https://travis-ci.org/infobiotech/php-json-cache)
-[![StyleCI](https://styleci.io/repos/109566219/shield?branch=master)](https://styleci.io/repos/109566219)
+[![Build Status](https://travis-ci.org/infobiotech/php-json-cache.svg?branch=master&format=flat-square)](https://travis-ci.org/infobiotech/php-json-cache)
+[![Latest Stable Version](https://poser.pugx.org/infobiotech/php-json-cache/v/stable?format=flat-square)](https://packagist.org/packages/infobiotech/php-json-cache)
+[![Latest Unstable Version](https://poser.pugx.org/infobiotech/php-json-cache/v/unstable?format=flat-square)](https://packagist.org/packages/infobiotech/php-json-cache)
+[![Total Downloads](https://poser.pugx.org/infobiotech/php-json-cache/downloads?format=flat-square)](https://packagist.org/packages/infobiotech/php-json-cache)
+[![composer.lock](https://poser.pugx.org/infobiotech/php-json-cache/composerlock?format=flat-square)](https://packagist.org/packages/infobiotech/php-json-cache)
+[![StyleCI](https://styleci.io/repos/109566219/shield?branch=master&format=flat-square)](https://styleci.io/repos/109566219)
 [![codecov](https://codecov.io/gh/infobiotech/php-json-cache/branch/master/graph/badge.svg)](https://codecov.io/gh/infobiotech/php-json-cache)
-
-Badges are always relative to `master` branch.
+[![License](https://poser.pugx.org/infobiotech/php-json-cache/license?format=flat-square)](https://packagist.org/packages/infobiotech/php-json-cache)
 
 Built with:
 * [PHP-FIG PSR-16](http://www.php-fig.org/psr/psr-16/): a common interface for caching libraries.
