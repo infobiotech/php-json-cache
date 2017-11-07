@@ -181,7 +181,7 @@ class JsonCache implements CacheInterface
         }
         $values = [];
         foreach ($keys as $key) {
-            $values[] = $this->get($key, $default);
+            $values[$key] = $this->get($key, $default);
         }
         return $values;
     }
@@ -297,18 +297,21 @@ class JsonCache implements CacheInterface
      */
     protected function deleteStorage()
     {
-        return (bool) $this->filesystem->delete($this->namespace);
+        if ($this->filesystem->has($this->namespace)) {
+            return (bool) $this->filesystem->delete($this->namespace);
+        }
+        return true;
     }
 
     /**
      *
      * @param string $key
-     * @return string
+     * @return string|boolean
      */
     protected function filterValidateKey($key)
     {
         if (!is_string($key)) {
-            throw new \Psr\SimpleCache\InvalidArgumentException();
+            return false;
         }
         return $key;
     }
