@@ -3,16 +3,16 @@
 namespace Infobiotech;
 
 /**
- * JsonCacheTest Class
+ * JsonCacheTest Class.
  *
  * @author Alessandro Raffa, Infobiotech S.r.l. <a.raffa@infobiotech.net>
  */
 class JsonCacheTest extends \PHPUnit\Framework\TestCase
 {
-    const TEST_NAMESPACE_1  = 'myNamespace';
-    const TEST_NAMESPACE_2  = 'phpJsonCache';
+    const TEST_NAMESPACE_1 = 'myNamespace';
+    const TEST_NAMESPACE_2 = 'phpJsonCache';
     const TEST_STRING_VALUE = 'value';
-    const TEST_INT_VALUE    = 19;
+    const TEST_INT_VALUE = 19;
 
     public function testInstance()
     {
