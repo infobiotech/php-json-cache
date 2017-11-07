@@ -19,7 +19,7 @@ Built with:
 
 ## Why JSON?
 
-In some situations, remote web hosts do not support (or do not allow to install) major cache drivers.
+In some situations, remote web hosts do not support (or do not allow to install) major cache drivers. JSON objects allow to set/get key-value items.
 
 ## Strategy
 
@@ -41,7 +41,19 @@ composer require infobiotech/php-json-cache
 
 **php-json-cache** implements [PSR-16](http://www.php-fig.org/psr/psr-16/) and thus provides a standardized API for storing and retrieving data.
 
-TODO add code examples
+Here is a simple use case
+
+```php
+require 'vendor/autoload.php';
+
+$filesystemAdapter = new League\Flysystem\Adapter\Local('.');
+
+$jsonCache         = new Infobiotech\JsonCache($filesystemAdapter, uniqid());
+
+$jsonCache->set('key', 'value'); // return TRUE
+
+$jsonCache->get('key'); // return 'value'
+```
 
 ## Security
 
