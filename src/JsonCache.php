@@ -1,7 +1,7 @@
 <?php
 /**
  * @package JsonCache
- * @version v0.1.0-alpha
+ * @version v0.3.0
  * @author Alessandro Raffa, Infobiotech S.r.l. <a.raffa@infobiotech.net>
  * @copyright (c) 2014-2017, Infobiotech S.r.l.
  * @license http://mit-license.org/
@@ -16,7 +16,7 @@ use League\Flysystem\Filesystem;
 use League\Flysystem\AdapterInterface as FlysystemAdapter;
 
 /**
- * JSON-based PSR-16 cache implementation.
+ * A key-value JSON-based PSR-16 cache implementation.
  *
  * @author Alessandro Raffa, Infobiotech S.r.l. <a.raffa@infobiotech.net>
  */
