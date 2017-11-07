@@ -46,4 +46,3 @@ tests/phpJsonCache.json
 ### examples
 /examples/vendor/
 /examples/cache/
-/examples/composer.lock
