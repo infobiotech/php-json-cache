@@ -1,4 +1,6 @@
-# php-json-cache
+!["infobiotech logo"](logo-infobiotech-black-noclaim.png)
+
+# infobiotech/php-json-cache
 
 A JSON-based PSR-16 cache implementation.
 
