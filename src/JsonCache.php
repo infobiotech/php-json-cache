@@ -124,7 +124,7 @@ class JsonCache implements CacheInterface
         }
         $data       = $this->getDataFromStorage();
         $data[$key] = [
-            self::FILED_VALUE => $value,
+            self::FILED_VALUE      => $value,
             self::FILED_EXPIRATION => microtime(true) + (float) $ttl,
         ];
         return $this->saveDataToStorage($data);
@@ -286,8 +286,7 @@ class JsonCache implements CacheInterface
      */
     protected function saveDataToStorage($data)
     {
-        return (bool) $this->filesystem->put($this->namespace,
-                        json_encode($data));
+        return (bool) $this->filesystem->put($this->namespace, json_encode($data));
     }
 
     /**
