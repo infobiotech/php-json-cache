@@ -44,5 +44,7 @@ GitHub.sublime-settings
 tests/myNamespace.json
 tests/phpJsonCache.json
 ### examples
-/examples/vendor/
 /examples/cache/
+/examples/vendor/
+/examples/composer.json
+/examples/composer.lock
