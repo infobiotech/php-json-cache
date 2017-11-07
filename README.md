@@ -36,22 +36,6 @@ TODO
 composer require infobiotech/php-json-cache
 ```
 
-#### Composer tip
-
-Since this package is still in development / pre-release stage, to avoid the error
-
-```
-[InvalidArgumentException]
-Could not find package infobiotech/php-json-cache at any version for your minimum-stability (stable). Check the package spelling or your minimum-stability
-```
-
-please add (or just check) the following lines to your composer.json
-
-```
-  "prefer-stable": true,
-  "minimum-stability": "dev"
-```
-
 ## Usage
 
 **php-json-cache** implements [PSR-16](http://www.php-fig.org/psr/psr-16/) and thus provides a standardized API for storing and retrieving data.
