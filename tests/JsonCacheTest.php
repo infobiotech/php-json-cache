@@ -14,21 +14,45 @@ class JsonCacheTest extends \PHPUnit\Framework\TestCase
     const TEST_STRING_VALUE = 'value';
     const TEST_INT_VALUE    = 19;
 
+    protected $multipleValues = [
+        'key1' => 'value1',
+        'key2' => 'value2',
+        'key3' => 'value3',
+        'key4' => 'value4',
+        'key5' => 'value5',
+        'key6' => 'value6',
+        'key7' => 'value7',
+    ];
+
     public function testInstance()
     {
+        /*
+         * Create instance
+         */
         $cache = new JsonCache(
                 new \League\Flysystem\Adapter\Local(dirname(__FILE__)),
                 static::TEST_NAMESPACE_1
         );
+        /*
+         * Check if the instance was created and returned
+         */
         $this->assertInstanceOf('Infobiotech\\JsonCache', $cache);
+        /*
+         * Garbage collection
+         */
+        $this->assertTrue($cache->clear());
     }
 
     public function testAll()
     {
+        /*
+         * Create instance
+         */
         $cache = new JsonCache(
                 new \League\Flysystem\Adapter\Local(dirname(__FILE__)),
                 self::TEST_NAMESPACE_2
         );
+        //$this->expectException($cache->set(null, static::TEST_STRING_VALUE));
         $this->assertTrue($cache->set('key', static::TEST_STRING_VALUE));
         $this->assertEquals(static::TEST_STRING_VALUE, $cache->get('key'));
         $this->assertNull($cache->get('missing'));
@@ -48,5 +72,10 @@ class JsonCacheTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($cache->delete('int'));
         $this->assertNull($cache->get('int'));
         $this->assertTrue($cache->clear());
+        $this->assertTrue($cache->setMultiple($this->multipleValues));
+        $this->assertTrue($cache->has('key1'));
+        $this->assertEquals($this->multipleValues,
+                $cache->getMultiple(array_keys($this->multipleValues)));
+        $this->assertTrue($cache->deleteMultiple(array_keys($this->multipleValues)));
     }
 }
