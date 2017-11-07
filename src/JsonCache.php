@@ -19,11 +19,6 @@ use League\Flysystem\AdapterInterface as FlysystemAdapter;
  * JSON-based PSR-16 cache implementation.
  *
  * @author Alessandro Raffa, Infobiotech S.r.l. <a.raffa@infobiotech.net>
- * @todo Add a local buffer https://github.com/matthiasmullie/scrapbook#local-buffer
- * @todo Add transactions https://github.com/matthiasmullie/scrapbook#transactions
- * @todo Add stampede protection https://github.com/matthiasmullie/scrapbook#stampede-protection
- * @todo Add more interfaces https://github.com/matthiasmullie/scrapbook#interfaces
- *
  */
 class JsonCache implements CacheInterface
 {
