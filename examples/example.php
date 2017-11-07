@@ -1,5 +1,7 @@
 <?php
+
 namespace Infobiotech;
+
 include '../vendor/autoload.php';
 // Create new JsonCache instance
 $jsonCache = new JsonCache(
