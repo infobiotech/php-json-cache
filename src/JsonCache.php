@@ -90,9 +90,9 @@ class JsonCache implements CacheInterface
             throw new \Psr\SimpleCache\InvalidArgumentException();
         }
         $data = $this->getDataFromStorage();
-        if (isset($data[$key]) && isset($data[self::FILED_EXPIRATION])) {
-            if ($data[self::FILED_EXPIRATION] > microtime(true)) {
-                $value = $data[self::FILED_VALUE];
+        if (isset($data[$key]) && isset($data[$key][self::FILED_EXPIRATION])) {
+            if ($data[$key][self::FILED_EXPIRATION] > microtime(true)) {
+                $value = $data[$key][self::FILED_VALUE];
             }
         }
         return $value;
@@ -286,7 +286,8 @@ class JsonCache implements CacheInterface
      */
     protected function saveDataToStorage($data)
     {
-        return (bool) $this->filesystem->put($this->namespace, json_encode($data));
+        return (bool) $this->filesystem->put($this->namespace,
+                        json_encode($data));
     }
 
     /**

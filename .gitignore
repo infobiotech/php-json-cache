@@ -7,7 +7,6 @@ nbdist/
 .nb-gradle/
 ### Composer ###
 composer.phar
-composer.lock
 /vendor/
 ### general swap/backup files ###
 *.so
@@ -45,3 +44,7 @@ GitHub.sublime-settings
 ### others
 tests/myNamespace.json
 tests/phpJsonCache.json
+### examples
+/examples/vendor/
+/examples/cache/
+/examples/composer.lock
