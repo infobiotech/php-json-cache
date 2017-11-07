@@ -277,7 +277,8 @@ class JsonCache implements CacheInterface
         if (!$this->filesystem->has($this->namespace)) {
             $this->filesystem->write($this->namespace, json_encode([]));
         }
-        return json_decode($this->filesystem->read($this->namespace), true);
+        $rawDataFromStorage = $this->filesystem->read($this->namespace);
+        return $rawDataFromStorage !== false ? json_decode($rawDataFromStorage, true) : [];
     }
 
     /**
