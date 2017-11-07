@@ -11,10 +11,6 @@
 
 namespace Infobiotech;
 
-/*
- *
- */
-
 use Psr\SimpleCache\CacheInterface;
 use League\Flysystem\Filesystem;
 use League\Flysystem\AdapterInterface as FlysystemAdapter;
@@ -23,6 +19,11 @@ use League\Flysystem\AdapterInterface as FlysystemAdapter;
  * JSON-based PSR-16 cache implementation.
  *
  * @author Alessandro Raffa, Infobiotech S.r.l. <a.raffa@infobiotech.net>
+ * @todo Add a local buffer https://github.com/matthiasmullie/scrapbook#local-buffer
+ * @todo Add transactions https://github.com/matthiasmullie/scrapbook#transactions
+ * @todo Add stampede protection https://github.com/matthiasmullie/scrapbook#stampede-protection
+ * @todo Add more interfaces https://github.com/matthiasmullie/scrapbook#interfaces
+ *
  */
 class JsonCache implements CacheInterface
 {
@@ -103,7 +104,7 @@ class JsonCache implements CacheInterface
      *
      * @param string                $key   The key of the item to store.
      * @param mixed                 $value The value of the item to store, must be serializable.
-     * @param null|int|DateInterval $ttl   Optional. The TTL value of this item. If no value is sent and
+     * @param null|int|\DateInterval $ttl   Optional. The TTL value of this item. If no value is sent and
      *                                     the driver supports TTL then the library may set a default value
      *                                     for it or let the driver take care of that.
      *
@@ -190,7 +191,7 @@ class JsonCache implements CacheInterface
      * Persists a set of key => value pairs in the cache, with an optional TTL.
      *
      * @param iterable              $values A list of key => value pairs for a multiple-set operation.
-     * @param null|int|DateInterval $ttl    Optional. The TTL value of this item. If no value is sent and
+     * @param null|int|\DateInterval $ttl    Optional. The TTL value of this item. If no value is sent and
      *                                      the driver supports TTL then the library may set a default value
      *                                      for it or let the driver take care of that.
      *
