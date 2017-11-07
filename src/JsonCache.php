@@ -1,10 +1,11 @@
 <?php
 /**
- * @package JsonCache
  * @version v0.1.0-alpha
+ *
  * @author Alessandro Raffa, Infobiotech S.r.l. <a.raffa@infobiotech.net>
  * @copyright (c) 2014-2017, Infobiotech S.r.l.
  * @license http://mit-license.org/
+ *
  * @uses league/flysystem
  * @uses psr/simple-cache
  */
@@ -15,9 +16,9 @@ namespace Infobiotech;
  *
  */
 
-use Psr\SimpleCache\CacheInterface;
-use League\Flysystem\Filesystem;
 use League\Flysystem\AdapterInterface as FlysystemAdapter;
+use League\Flysystem\Filesystem;
+use Psr\SimpleCache\CacheInterface;
 
 /**
  * JSON-based PSR-16 cache implementation.
@@ -29,29 +30,27 @@ class JsonCache implements CacheInterface
     /*
      *
      */
-    const FILED_VALUE      = 'value';
+    const FILED_VALUE = 'value';
     const FILED_EXPIRATION = 'expiration';
     /*
      *
      */
-    const DEFAULT_TTL      = 1200;
+    const DEFAULT_TTL = 1200;
 
     /**
-     *
      * @var \League\Flysystem\Filesystem
      */
     protected $filesystem;
 
     /**
-     *
      * @var string
      */
     protected $namespace;
 
     /**
-     *
      * @param FlysystemAdapter $filesystemAdapter
-     * @param string $namespace
+     * @param string           $namespace
+     *
      * @return JsonCache
      */
     public function __construct(FlysystemAdapter $filesystemAdapter, $namespace)
@@ -63,7 +62,7 @@ class JsonCache implements CacheInterface
         /*
          *
          */
-        $this->namespace  = $namespace.'.json';
+        $this->namespace = $namespace.'.json';
         /*
          *
          */
@@ -76,10 +75,10 @@ class JsonCache implements CacheInterface
      * @param string $key     The unique key of this item in the cache.
      * @param mixed  $default Default value to return if the key does not exist.
      *
-     * @return mixed The value of the item from the cache, or $default in case of cache miss.
-     *
      * @throws \Psr\SimpleCache\InvalidArgumentException
-     *   MUST be thrown if the $key string is not a legal value.
+     *                                                   MUST be thrown if the $key string is not a legal value.
+     *
+     * @return mixed The value of the item from the cache, or $default in case of cache miss.
      *
      * @todo Implement better $key validation and filtering
      */
@@ -95,6 +94,7 @@ class JsonCache implements CacheInterface
                 $value = $data[$key][self::FILED_VALUE];
             }
         }
+
         return $value;
     }
 
@@ -107,10 +107,10 @@ class JsonCache implements CacheInterface
      *                                     the driver supports TTL then the library may set a default value
      *                                     for it or let the driver take care of that.
      *
-     * @return bool True on success and false on failure.
-     *
      * @throws \Psr\SimpleCache\InvalidArgumentException
-     *   MUST be thrown if the $key string is not a legal value.
+     *                                                   MUST be thrown if the $key string is not a legal value.
+     *
+     * @return bool True on success and false on failure.
      *
      * @todo Implement better $key validation and filtering
      */
@@ -122,11 +122,12 @@ class JsonCache implements CacheInterface
         if (empty($ttl) || !is_numeric($ttl)) {
             $ttl = self::DEFAULT_TTL;
         }
-        $data       = $this->getDataFromStorage();
+        $data = $this->getDataFromStorage();
         $data[$key] = [
-            self::FILED_VALUE => $value,
+            self::FILED_VALUE      => $value,
             self::FILED_EXPIRATION => microtime(true) + (float) $ttl,
         ];
+
         return $this->saveDataToStorage($data);
     }
 
@@ -135,10 +136,10 @@ class JsonCache implements CacheInterface
      *
      * @param string $key The unique cache key of the item to delete.
      *
-     * @return bool True if the item was successfully removed. False if there was an error.
-     *
      * @throws \Psr\SimpleCache\InvalidArgumentException
-     *   MUST be thrown if the $key string is not a legal value.
+     *                                                   MUST be thrown if the $key string is not a legal value.
+     *
+     * @return bool True if the item was successfully removed. False if there was an error.
      */
     public function delete($key)
     {
@@ -149,6 +150,7 @@ class JsonCache implements CacheInterface
         if (isset($data[$key])) {
             unset($data[$key]);
         }
+
         return $this->saveDataToStorage($data);
     }
 
@@ -168,11 +170,11 @@ class JsonCache implements CacheInterface
      * @param iterable $keys    A list of keys that can obtained in a single operation.
      * @param mixed    $default Default value to return for keys that do not exist.
      *
-     * @return iterable A list of key => value pairs. Cache keys that do not exist or are stale will have $default as value.
-     *
      * @throws \Psr\SimpleCache\InvalidArgumentException
-     *   MUST be thrown if $keys is neither an array nor a Traversable,
-     *   or if any of the $keys are not a legal value.
+     *                                                   MUST be thrown if $keys is neither an array nor a Traversable,
+     *                                                   or if any of the $keys are not a legal value.
+     *
+     * @return iterable A list of key => value pairs. Cache keys that do not exist or are stale will have $default as value.
      */
     public function getMultiple($keys, $default = null)
     {
@@ -183,6 +185,7 @@ class JsonCache implements CacheInterface
         foreach ($keys as $key) {
             $values[] = $this->get($key, $default);
         }
+
         return $values;
     }
 
@@ -194,11 +197,11 @@ class JsonCache implements CacheInterface
      *                                      the driver supports TTL then the library may set a default value
      *                                      for it or let the driver take care of that.
      *
-     * @return bool True on success and false on failure.
-     *
      * @throws \Psr\SimpleCache\InvalidArgumentException
-     *   MUST be thrown if $values is neither an array nor a Traversable,
-     *   or if any of the $values are not a legal value.
+     *                                                   MUST be thrown if $values is neither an array nor a Traversable,
+     *                                                   or if any of the $values are not a legal value.
+     *
+     * @return bool True on success and false on failure.
      */
     public function setMultiple($values, $ttl = null)
     {
@@ -211,6 +214,7 @@ class JsonCache implements CacheInterface
                 $failure = true;
             }
         }
+
         return (bool) !$failure;
     }
 
@@ -219,11 +223,11 @@ class JsonCache implements CacheInterface
      *
      * @param iterable $keys A list of string-based keys to be deleted.
      *
-     * @return bool True if the items were successfully removed. False if there was an error.
-     *
      * @throws \Psr\SimpleCache\InvalidArgumentException
-     *   MUST be thrown if $keys is neither an array nor a Traversable,
-     *   or if any of the $keys are not a legal value.
+     *                                                   MUST be thrown if $keys is neither an array nor a Traversable,
+     *                                                   or if any of the $keys are not a legal value.
+     *
+     * @return bool True if the items were successfully removed. False if there was an error.
      */
     public function deleteMultiple($keys)
     {
@@ -236,6 +240,7 @@ class JsonCache implements CacheInterface
                 $failure = true;
             }
         }
+
         return (bool) !$failure;
     }
 
@@ -249,10 +254,10 @@ class JsonCache implements CacheInterface
      *
      * @param string $key The cache item key.
      *
-     * @return bool
-     *
      * @throws \Psr\SimpleCache\InvalidArgumentException
-     *   MUST be thrown if the $key string is not a legal value.
+     *                                                   MUST be thrown if the $key string is not a legal value.
+     *
+     * @return bool
      */
     public function has($key)
     {
@@ -264,11 +269,11 @@ class JsonCache implements CacheInterface
         if (isset($data[$key])) {
             $has = true;
         }
+
         return $has;
     }
 
     /**
-     *
      * @return array
      */
     protected function getDataFromStorage()
@@ -276,13 +281,14 @@ class JsonCache implements CacheInterface
         if (!$this->filesystem->has($this->namespace)) {
             $this->filesystem->write($this->namespace, json_encode([]));
         }
+
         return json_decode($this->filesystem->read($this->namespace), true);
     }
 
     /**
-     *
      * @param array $data
-     * @return boolean
+     *
+     * @return bool
      */
     protected function saveDataToStorage($data)
     {
@@ -291,9 +297,9 @@ class JsonCache implements CacheInterface
     }
 
     /**
-     *
      * @param array $data
-     * @return boolean
+     *
+     * @return bool
      */
     protected function deleteStorage()
     {
@@ -301,8 +307,8 @@ class JsonCache implements CacheInterface
     }
 
     /**
-     *
      * @param string $key
+     *
      * @return string
      */
     protected function filterValidateKey($key)
@@ -310,6 +316,7 @@ class JsonCache implements CacheInterface
         if (!is_string($key)) {
             throw new \Psr\SimpleCache\InvalidArgumentException();
         }
+
         return $key;
     }
 }
