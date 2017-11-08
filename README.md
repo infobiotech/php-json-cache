@@ -1,16 +1,24 @@
-!["infobiotech logo"](logo-infobiotech-black-noclaim.png)
+[!["infobiotech logo"](logo-infobiotech-black-noclaim.png)](http://infobiotech.net?ibtref=github-readme-header)
 
 # infobiotech/php-json-cache
 
-A JSON-based PSR-16 cache implementation.
-
-[![Build Status](https://travis-ci.org/infobiotech/php-json-cache.svg?branch=master&format=flat-square)](https://travis-ci.org/infobiotech/php-json-cache)
+[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%205.6-8892BF.svg?style=flat-square)](https://php.net/)
 [![Latest Stable Version](https://poser.pugx.org/infobiotech/php-json-cache/v/stable?format=flat-square)](https://packagist.org/packages/infobiotech/php-json-cache)
 [![Latest Unstable Version](https://poser.pugx.org/infobiotech/php-json-cache/v/unstable?format=flat-square)](https://packagist.org/packages/infobiotech/php-json-cache)
 [![Total Downloads](https://poser.pugx.org/infobiotech/php-json-cache/downloads?format=flat-square)](https://packagist.org/packages/infobiotech/php-json-cache)
 [![composer.lock](https://poser.pugx.org/infobiotech/php-json-cache/composerlock?format=flat-square)](https://packagist.org/packages/infobiotech/php-json-cache)
-[![codecov](https://codecov.io/gh/infobiotech/php-json-cache/branch/master/graph/badge.svg)](https://codecov.io/gh/infobiotech/php-json-cache)
+[![Dependency Status](https://www.versioneye.com/user/projects/5a01c57d0fb24f14d7b411dd/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/5a01c57d0fb24f14d7b411dd)
 [![License](https://poser.pugx.org/infobiotech/php-json-cache/license?format=flat-square)](https://packagist.org/packages/infobiotech/php-json-cache)
+
+A key-value JSON-based PSR-16 cache implementation.
+
+|              | branch | build status | code coverage | code quality |
+| ------------ | ------ | ------------ | ------------- | ------------ |
+| Travis CI    | master | [![Build Status](https://travis-ci.org/infobiotech/php-json-cache.svg?branch=master&format=flat-square)](https://travis-ci.org/infobiotech/php-json-cache) | | |
+| CodeCov      | master |              | [![codecov](https://codecov.io/gh/infobiotech/php-json-cache/branch/master/graph/badge.svg)](https://codecov.io/gh/infobiotech/php-json-cache) | |
+| Scrutinizer  | master | [![Build Status](https://scrutinizer-ci.com/g/infobiotech/php-json-cache/badges/build.png?b=master)](https://scrutinizer-ci.com/g/infobiotech/php-json-cache/build-status/master) |               | [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/infobiotech/php-json-cache/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/infobiotech/php-json-cache/?branch=master) |
+| Code Climate | master |              | [![Test Coverage](https://api.codeclimate.com/v1/badges/15e7b0aa9a35fe0dfffe/test_coverage)](https://codeclimate.com/github/infobiotech/php-json-cache/test_coverage) | [![Maintainability](https://api.codeclimate.com/v1/badges/15e7b0aa9a35fe0dfffe/maintainability)](https://codeclimate.com/github/infobiotech/php-json-cache/maintainability) |
+| Codacy       | master |              |               | [![Codacy Badge](https://api.codacy.com/project/badge/Grade/446dcd15de1647aaa0af4e0ba0d9f021)](https://www.codacy.com/app/alessandroraffa/php-json-cache?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=infobiotech/php-json-cache&amp;utm_campaign=Badge_Grade) |
 
 Built with:
 * [PHP-FIG PSR-16](http://www.php-fig.org/psr/psr-16/): a common interface for caching libraries.
@@ -19,11 +27,8 @@ Built with:
 
 ## Why JSON?
 
-In some situations, remote web hosts do not support (or do not allow to install) major cache drivers. JSON objects allow to set/get key-value items.
-
-## Strategy
-
-TODO
+* In some situations, remote web hosts do not support (or do not allow to install) major cache drivers.
+* JSON objects allow to set/get key-value items.
 
 ## Getting Started
 
@@ -33,17 +38,23 @@ TODO
 
 ### Installing via composer
 
-```
-composer require infobiotech/php-json-cache
+Make sure you have [composer](http://getcomposer.org/) installed.
+
+Then run the following command from your project root:
+
+```sh
+$ composer require infobiotech/php-json-cache
 ```
 
 ## Usage
 
-**php-json-cache** implements [PSR-16](http://www.php-fig.org/psr/psr-16/) and thus provides a standardized API for storing and retrieving data.
+**infobiotech/php-json-cache** implements [PSR-16](http://www.php-fig.org/psr/psr-16/) and thus provides a standardized API for storing and retrieving data.
 
 Here is a simple use case
 
 ```php
+<?php
+
 require 'vendor/autoload.php';
 
 $filesystemAdapter = new League\Flysystem\Adapter\Local('.');
@@ -55,31 +66,33 @@ $jsonCache->set('key', 'value'); // return TRUE
 $jsonCache->get('key'); // return 'value'
 ```
 
-## Security
+## Other PSR-16 implementations
 
-TODO Security considerations
-
-## Garbage collection
-
-TODO Garbage collection considerations
+* [sabre-io/cache](https://github.com/sabre-io/cache) - In-memory, APCu and Memcached cache abstraction layer.
+* [matthiasmullie/scrapbook](https://github.com/matthiasmullie/scrapbook) - Full featured caching environment with several adapters.
+* [SilentByte/litecache](https://github.com/SilentByte/litecache) - Lightweight code/opcode caching by generating `*.php` files for cached objects.
+* [kodus/file-cache](https://github.com/kodus/file-cache) - Flat-file cache-implementation.
+* [naroga/redis-cache](https://github.com/naroga/redis-cache) - A Redis driver implementation.
+* [paillechat/apcu-simple-cache](https://github.com/paillechat/apcu-simple-cache) - APCu implementation.
+* [kodus/mock-cache](https://github.com/kodus/mock-cache) - A PSR-16 mock cache for integration testing.
 
 ## Tests
 
 ### Running Tests
 
-``` bash
+```sh
 $ ./vendor/bin/phpunit
 ```
 
 ### Running PHP Code Sniffer
 
-``` bash
+```sh
 $ ./vendor/bin/phpcs src --standard=psr2 -sp
 ```
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/infobiotech/php-json-cache/tags).
+We try to follow [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/infobiotech/php-json-cache/tags).
 
 ## Authors
 
