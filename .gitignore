@@ -8,7 +8,9 @@ nbdist/
 .nb-gradle/
 ### Composer ###
 composer.phar
+/vendor
 /vendor/
+composer.lock
 ### general swap/backup files ###
 *.so
 *.log
