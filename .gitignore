@@ -18,6 +18,7 @@ composer.lock
 *~
 *.swp
 *.DS_Store
+*.lock
 # Cache files for Sublime Text
 *.tmlanguage.cache
 *.tmPreferences.cache
