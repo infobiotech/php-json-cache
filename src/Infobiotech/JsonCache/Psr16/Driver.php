@@ -1,7 +1,7 @@
 <?php
 /**
- * @package JsonCache
- * @version v0.3.0
+ * @package Infobiotech\JsonCache
+ * @version v1.0.0-alpha
  * @author Alessandro Raffa, Infobiotech S.r.l. <a.raffa@infobiotech.net>
  * @copyright (c) 2014-2017, Infobiotech S.r.l.
  * @license http://mit-license.org/
@@ -9,7 +9,11 @@
  * @uses psr/simple-cache
  */
 
-namespace Infobiotech;
+namespace Infobiotech\JsonCache\Psr16;
+
+/*
+ *
+ */
 
 use Psr\SimpleCache\CacheInterface;
 use League\Flysystem\Filesystem;
@@ -20,7 +24,7 @@ use League\Flysystem\AdapterInterface as FlysystemAdapter;
  *
  * @author Alessandro Raffa, Infobiotech S.r.l. <a.raffa@infobiotech.net>
  */
-class JsonCache implements CacheInterface
+class Driver implements CacheInterface
 {
     /*
      *
@@ -99,7 +103,7 @@ class JsonCache implements CacheInterface
      *
      * @param string                $key   The key of the item to store.
      * @param mixed                 $value The value of the item to store, must be serializable.
-     * @param null|int|\DateInterval $ttl   Optional. The TTL value of this item. If no value is sent and
+     * @param null|int|DateInterval $ttl   Optional. The TTL value of this item. If no value is sent and
      *                                     the driver supports TTL then the library may set a default value
      *                                     for it or let the driver take care of that.
      *
@@ -164,11 +168,12 @@ class JsonCache implements CacheInterface
      * @param iterable $keys    A list of keys that can obtained in a single operation.
      * @param mixed    $default Default value to return for keys that do not exist.
      *
-     * @return iterable A list of key => value pairs. Cache keys that do not exist or are stale will have $default as value.
+     * @return iterable A list of key => value pairs.
+     *      Cache keys that do not exist or are stale will have $default as value.
      *
      * @throws \Psr\SimpleCache\InvalidArgumentException
-     *   MUST be thrown if $keys is neither an array nor a Traversable,
-     *   or if any of the $keys are not a legal value.
+     *      MUST be thrown if $keys is neither an array nor a Traversable,
+     *      or if any of the $keys are not a legal value.
      */
     public function getMultiple($keys, $default = null)
     {
@@ -186,7 +191,7 @@ class JsonCache implements CacheInterface
      * Persists a set of key => value pairs in the cache, with an optional TTL.
      *
      * @param iterable              $values A list of key => value pairs for a multiple-set operation.
-     * @param null|int|\DateInterval $ttl    Optional. The TTL value of this item. If no value is sent and
+     * @param null|int|DateInterval $ttl    Optional. The TTL value of this item. If no value is sent and
      *                                      the driver supports TTL then the library may set a default value
      *                                      for it or let the driver take care of that.
      *
@@ -272,8 +277,7 @@ class JsonCache implements CacheInterface
         if (!$this->filesystem->has($this->namespace)) {
             $this->filesystem->write($this->namespace, json_encode([]));
         }
-        $rawDataFromStorage = $this->filesystem->read($this->namespace);
-        return $rawDataFromStorage !== false ? json_decode($rawDataFromStorage, true) : [];
+        return json_decode($this->filesystem->read($this->namespace), true);
     }
 
     /**

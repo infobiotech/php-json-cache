@@ -1,6 +1,16 @@
 <?php
+/**
+ * @package Infobiotech\JsonCache
+ * @version 1.0.0-alpha
+ * @author Alessandro Raffa, Infobiotech S.r.l. <a.raffa@infobiotech.net>
+ * @copyright (c) 2014-2017, Infobiotech S.r.l.
+ * @license http://mit-license.org/
+ * @uses phpunit/phpunit
+ */
 
-namespace Infobiotech;
+namespace Infobiotech\JsonCache\Psr16;
+
+use Infobiotech\JsonCache\Psr16\Driver;
 
 /**
  * JsonCacheTest Class
@@ -29,14 +39,13 @@ class JsonCacheTest extends \PHPUnit\Framework\TestCase
         /*
          * Create instance
          */
-        $cache = new JsonCache(
-                new \League\Flysystem\Adapter\Local(dirname(__FILE__)),
-                static::TEST_NAMESPACE_1
+        $cache = new Driver(
+                new \League\Flysystem\Adapter\Local(dirname(__FILE__)), static::TEST_NAMESPACE_1
         );
         /*
          * Check if the instance was created and returned
          */
-        $this->assertInstanceOf('Infobiotech\\JsonCache', $cache);
+        $this->assertInstanceOf('Infobiotech\\JsonCache\\Psr16\\Driver', $cache);
         /*
          * Garbage collection
          */
@@ -48,9 +57,8 @@ class JsonCacheTest extends \PHPUnit\Framework\TestCase
         /*
          * Create instance
          */
-        $cache = new JsonCache(
-                new \League\Flysystem\Adapter\Local(dirname(__FILE__)),
-                self::TEST_NAMESPACE_2
+        $cache = new Driver(
+                new \League\Flysystem\Adapter\Local(dirname(__FILE__)), self::TEST_NAMESPACE_2
         );
         //$this->expectException($cache->set(null, static::TEST_STRING_VALUE));
         $this->assertTrue($cache->set('key', static::TEST_STRING_VALUE));
@@ -74,8 +82,8 @@ class JsonCacheTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($cache->clear());
         $this->assertTrue($cache->setMultiple($this->multipleValues));
         $this->assertTrue($cache->has('key1'));
-        $this->assertEquals($this->multipleValues,
-                $cache->getMultiple(array_keys($this->multipleValues)));
+        $this->assertEquals($this->multipleValues, $cache->getMultiple(array_keys($this->multipleValues)));
         $this->assertTrue($cache->deleteMultiple(array_keys($this->multipleValues)));
+        $this->assertTrue($cache->clear());
     }
 }
