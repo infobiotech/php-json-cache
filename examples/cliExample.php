@@ -1,7 +1,7 @@
 <?php
 /**
  * @package Infobiotech\JsonCache
- * @version 0.3.0
+ * @version v1.0.0-alpha
  * @author Alessandro Raffa, Infobiotech S.r.l. <a.raffa@infobiotech.net>
  * @copyright (c) 2014-2017, Infobiotech S.r.l.
  * @license http://mit-license.org/
@@ -24,7 +24,7 @@ $climate->addArt('art');
 $climate->backgroundBlack()->draw('banner-infobiotech-colored');
 $climate->backgroundBlack()->lightGray()->border();
 $climate->backgroundBlack()->white()->out('');
-$climate->backgroundBlack()->white()->bold()->out('infobiotech/php-json-cache v0.3.0 client example');
+$climate->backgroundBlack()->white()->bold()->out('infobiotech/php-json-cache v1.0.0-alpha client example');
 $climate->backgroundBlack()->white()->out('');
 $climate->backgroundBlack()->lightGray()->border();
 /*
@@ -41,7 +41,7 @@ $climate->backgroundBlack()->white()->out('');
  */
 $climate->backgroundBlack()->white()->out('');
 $climate->backgroundBlack()->white()->inline('Creating JsonCache instance... ');
-$jsonCache         = new Infobiotech\JsonCache($filesystemAdapter, uniqid());
+$jsonCacheDriver   = new Infobiotech\JsonCache($filesystemAdapter, uniqid());
 usleep(mt_rand(150000, 800000));
 $climate->backgroundBlack()->lightGreen()->bold()->inline('done');
 $climate->backgroundBlack()->white()->out('');
@@ -58,7 +58,7 @@ $climate->backgroundBlack()->magenta()->bold()->inline(var_export($value, true))
  */
 $climate->backgroundBlack()->white()->out('');
 $climate->backgroundBlack()->white()->inline('Storing the value... ');
-$jsonCache->set('key', $value);
+$jsonCacheDriver->set('key', $value);
 usleep(mt_rand(150000, 800000));
 $climate->backgroundBlack()->lightGreen()->bold()->inline('done');
 /*
@@ -66,7 +66,7 @@ $climate->backgroundBlack()->lightGreen()->bold()->inline('done');
  */
 $climate->backgroundBlack()->white()->out('');
 $climate->backgroundBlack()->white()->inline('Getting the value... ');
-$checkValue        = $jsonCache->get('key');
+$checkValue        = $jsonCacheDriver->get('key');
 usleep(mt_rand(150000, 800000));
 $climate->backgroundBlack()->magenta()->bold()->inline(var_export($checkValue, true));
 /*
@@ -107,7 +107,7 @@ $climate->backgroundBlack()->magenta()->bold()->inline(var_export($ttl, true));
  */
 $climate->backgroundBlack()->white()->out('');
 $climate->backgroundBlack()->white()->inline('Setting the value with the TTL... ');
-$jsonCache->set('ttlkey', $ttlValue, $ttl);
+$jsonCacheDriver->set('ttlkey', $ttlValue, $ttl);
 usleep(mt_rand(150000, 800000));
 $climate->backgroundBlack()->magenta()->bold()->inline(var_export($ttlValue, true));
 /*
@@ -115,7 +115,7 @@ $climate->backgroundBlack()->magenta()->bold()->inline(var_export($ttlValue, tru
  */
 $climate->backgroundBlack()->white()->out('');
 $climate->backgroundBlack()->white()->inline('Getting the value before expiration... ');
-$checkTtlValue = $jsonCache->get('ttlkey');
+$checkTtlValue = $jsonCacheDriver->get('ttlkey');
 usleep(mt_rand(150000, 800000));
 $climate->backgroundBlack()->magenta()->bold()->inline(var_export($checkTtlValue, true));
 /*
@@ -146,7 +146,7 @@ for ($i = 0; $i <= 100; $i++) {
  */
 $climate->backgroundBlack()->white()->inline('Getting the value after expiration... ');
 usleep(mt_rand(150000, 800000));
-$checkExpiredValue = $jsonCache->get('ttlkey');
+$checkExpiredValue = $jsonCacheDriver->get('ttlkey');
 $climate->backgroundBlack()->magenta()->bold()->inline(var_export($checkExpiredValue, true));
 /*
  *
@@ -170,7 +170,7 @@ $climate->backgroundBlack()->white()->out('');
  */
 $climate->backgroundBlack()->white()->out('');
 $climate->backgroundBlack()->white()->inline('Cleaning up JsonCache...');
-$jsonCache->clear();
+$jsonCacheDriver->clear();
 usleep(mt_rand(150000, 800000));
 $climate->backgroundBlack()->lightGreen()->bold()->inline('done');
 /*
@@ -182,7 +182,7 @@ $climate->backgroundBlack()->white()->out('');
  */
 $climate->backgroundBlack()->white()->out('');
 $climate->backgroundBlack()->white()->inline('Unsetting local variable...');
-unset($jsonCache);
+unset($jsonCacheDriver);
 usleep(mt_rand(150000, 800000));
 $climate->backgroundBlack()->lightGreen()->bold()->inline('done');
 $climate->backgroundBlack()->white()->out('');
