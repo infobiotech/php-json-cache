@@ -1,8 +1,19 @@
 <?php
+/**
+ * @package Infobiotech\JsonCache
+ * @version 0.3.0
+ * @author Alessandro Raffa, Infobiotech S.r.l. <a.raffa@infobiotech.net>
+ * @copyright (c) 2014-2017, Infobiotech S.r.l.
+ * @license http://mit-license.org/
+ * @uses league/climate
+ */
 /*
- * For this example `composer require league/climate`
+ *
  */
 require 'vendor/autoload.php';
+/*
+ *
+ */
 $climate           = new League\CLImate\CLImate();
 $climate->backgroundBlack()->clear();
 $climate->backgroundBlack()->white()->out('');
@@ -13,7 +24,7 @@ $climate->addArt('art');
 $climate->backgroundBlack()->draw('banner-infobiotech-colored');
 $climate->backgroundBlack()->lightGray()->border();
 $climate->backgroundBlack()->white()->out('');
-$climate->backgroundBlack()->white()->bold()->out('infobiotech/php-json-cache client example');
+$climate->backgroundBlack()->white()->bold()->out('infobiotech/php-json-cache v0.3.0 client example');
 $climate->backgroundBlack()->white()->out('');
 $climate->backgroundBlack()->lightGray()->border();
 /*
