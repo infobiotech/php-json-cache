@@ -18,6 +18,7 @@ namespace Infobiotech\JsonCache\Psr16;
 use Psr\SimpleCache\CacheInterface;
 use League\Flysystem\Filesystem;
 use League\Flysystem\AdapterInterface as FlysystemAdapter;
+use Infobiotech\JsonCache\Psr16\InvalidArgumentException;
 
 /**
  * A key-value JSON-based PSR-16 cache implementation.
@@ -78,7 +79,7 @@ class Driver implements CacheInterface
      *
      * @return mixed The value of the item from the cache, or $default in case of cache miss.
      *
-     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws InvalidArgumentException
      *   MUST be thrown if the $key string is not a legal value.
      *
      * @todo Implement better $key validation and filtering
@@ -87,7 +88,7 @@ class Driver implements CacheInterface
     {
         $value = $default;
         if (!is_string($this->filterValidateKey($key))) {
-            throw new \Psr\SimpleCache\InvalidArgumentException();
+            throw new InvalidArgumentException();
         }
         $data = $this->getDataFromStorage();
         if (isset($data[$key]) && isset($data[$key][self::FILED_EXPIRATION])) {
@@ -109,7 +110,7 @@ class Driver implements CacheInterface
      *
      * @return bool True on success and false on failure.
      *
-     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws InvalidArgumentException
      *   MUST be thrown if the $key string is not a legal value.
      *
      * @todo Implement better $key validation and filtering
@@ -117,7 +118,7 @@ class Driver implements CacheInterface
     public function set($key, $value, $ttl = null)
     {
         if (!is_string($this->filterValidateKey($key))) {
-            throw new \Psr\SimpleCache\InvalidArgumentException();
+            throw new InvalidArgumentException();
         }
         if (empty($ttl) || !is_numeric($ttl)) {
             $ttl = self::DEFAULT_TTL;
@@ -137,13 +138,13 @@ class Driver implements CacheInterface
      *
      * @return bool True if the item was successfully removed. False if there was an error.
      *
-     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws InvalidArgumentException
      *   MUST be thrown if the $key string is not a legal value.
      */
     public function delete($key)
     {
         if (!is_string($this->filterValidateKey($key))) {
-            throw new \Psr\SimpleCache\InvalidArgumentException();
+            throw new InvalidArgumentException();
         }
         $data = $this->getDataFromStorage();
         if (isset($data[$key])) {
@@ -171,14 +172,14 @@ class Driver implements CacheInterface
      * @return iterable A list of key => value pairs.
      *      Cache keys that do not exist or are stale will have $default as value.
      *
-     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws InvalidArgumentException
      *      MUST be thrown if $keys is neither an array nor a Traversable,
      *      or if any of the $keys are not a legal value.
      */
     public function getMultiple($keys, $default = null)
     {
         if (!is_array($keys)) {
-            throw new \Psr\SimpleCache\InvalidArgumentException();
+            throw new InvalidArgumentException();
         }
         $values = [];
         foreach ($keys as $key) {
@@ -197,7 +198,7 @@ class Driver implements CacheInterface
      *
      * @return bool True on success and false on failure.
      *
-     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws InvalidArgumentException
      *   MUST be thrown if $values is neither an array nor a Traversable,
      *   or if any of the $values are not a legal value.
      */
@@ -205,7 +206,7 @@ class Driver implements CacheInterface
     {
         $failure = false;
         if (!is_array($values)) {
-            throw new \Psr\SimpleCache\InvalidArgumentException();
+            throw new InvalidArgumentException();
         }
         foreach ($values as $key => $value) {
             if (!$this->set($key, $value, $ttl)) {
@@ -222,7 +223,7 @@ class Driver implements CacheInterface
      *
      * @return bool True if the items were successfully removed. False if there was an error.
      *
-     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws InvalidArgumentException
      *   MUST be thrown if $keys is neither an array nor a Traversable,
      *   or if any of the $keys are not a legal value.
      */
@@ -230,7 +231,7 @@ class Driver implements CacheInterface
     {
         $failure = false;
         if (!is_array($keys)) {
-            throw new \Psr\SimpleCache\InvalidArgumentException();
+            throw new InvalidArgumentException();
         }
         foreach ($keys as $key) {
             if (!$this->delete($key)) {
@@ -252,14 +253,14 @@ class Driver implements CacheInterface
      *
      * @return bool
      *
-     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws InvalidArgumentException
      *   MUST be thrown if the $key string is not a legal value.
      */
     public function has($key)
     {
         $has = false;
         if (!is_string($this->filterValidateKey($key))) {
-            throw new \Psr\SimpleCache\InvalidArgumentException();
+            throw new InvalidArgumentException();
         }
         $data = $this->getDataFromStorage();
         if (isset($data[$key])) {
