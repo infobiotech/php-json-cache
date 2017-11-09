@@ -7,14 +7,12 @@
  * @license http://mit-license.org/
  * @uses psr/simple-cache
  */
-declare(strict_types = 1);
 
 namespace Infobiotech\JsonCache\Psr16;
 
 /** SPL use block. */
-use Throwable;
+use InvalidArgumentException as PhpInvalidArgumentException;
 /** PSR-16 use block. */
-use Psr\SimpleCache\CacheException as PsrCacheException;
 use Psr\SimpleCache\InvalidArgumentException as PsrInvalidArgumentException;
 
 /**
@@ -23,17 +21,7 @@ use Psr\SimpleCache\InvalidArgumentException as PsrInvalidArgumentException;
  *
  * @author Alessandro Raffa, Infobiotech S.r.l. <a.raffa@infobiotech.net>
  */
-class InvalidArgumentException extends PsrCacheException implements PsrInvalidArgumentException
+class InvalidArgumentException extends PhpInvalidArgumentException implements PsrInvalidArgumentException
 {
 
-    /**
-     * Creates the exception object.
-     *
-     * @param string         $message
-     * @param Throwable|null $previous
-     */
-    public function __construct(string $message, Throwable $previous = null)
-    {
-        parent::__construct($message, $previous);
-    }
 }
