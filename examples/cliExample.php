@@ -41,7 +41,7 @@ $climate->backgroundBlack()->white()->out('');
  */
 $climate->backgroundBlack()->white()->out('');
 $climate->backgroundBlack()->white()->inline('Creating JsonCache instance... ');
-$jsonCacheDriver   = new Infobiotech\JsonCache($filesystemAdapter, uniqid());
+$jsonCacheDriver   = new Infobiotech\JsonCache\Psr16\Driver($filesystemAdapter, uniqid());
 usleep(mt_rand(150000, 800000));
 $climate->backgroundBlack()->lightGreen()->bold()->inline('done');
 $climate->backgroundBlack()->white()->out('');
@@ -139,7 +139,10 @@ $climate->backgroundBlack()->white()->out('Wait for value expiration');
 $progress = $climate->backgroundBlack()->white()->progress()->total(100);
 for ($i = 0; $i <= 100; $i++) {
     $progress->current($i);
-    usleep(mt_rand($ttl * 10000, $ttl * 20000));
+    usleep(mt_rand($ttl * 1250, $ttl * 40000));
+    if (mt_rand(0, 100) > 50) {
+        $i++;
+    }
 }
 /*
  *
