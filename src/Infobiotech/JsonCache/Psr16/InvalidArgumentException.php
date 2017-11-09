@@ -23,5 +23,7 @@ use Psr\SimpleCache\InvalidArgumentException as PsrInvalidArgumentException;
  */
 class InvalidArgumentException extends PhpInvalidArgumentException implements PsrInvalidArgumentException
 {
-
+    /*
+     * No custom methods
+     */
 }

@@ -15,6 +15,7 @@ namespace Infobiotech\JsonCache\Psr16;
  *
  */
 
+use DateInterval;
 use Psr\SimpleCache\CacheInterface;
 use League\Flysystem\Filesystem;
 use League\Flysystem\AdapterInterface as FlysystemAdapter;
@@ -53,7 +54,7 @@ class Driver implements CacheInterface
      *
      * @param FlysystemAdapter $filesystemAdapter
      * @param string $namespace
-     * @return JsonCache
+     * @return Driver
      */
     public function __construct(FlysystemAdapter $filesystemAdapter, $namespace)
     {
@@ -275,10 +276,16 @@ class Driver implements CacheInterface
      */
     protected function getDataFromStorage()
     {
+        $dataArrayFromStorage = [];
         if (!$this->filesystem->has($this->namespace)) {
             $this->filesystem->write($this->namespace, json_encode([]));
         }
-        return json_decode($this->filesystem->read($this->namespace), true);
+        $rawDataFromStorage = $this->filesystem->read($this->namespace);
+        if ($rawDataFromStorage !== false) {
+            $dataArrayFromStorage = json_decode($rawDataFromStorage, true);
+        }
+        unset($rawDataFromStorage);
+        return $dataArrayFromStorage;
     }
 
     /**
