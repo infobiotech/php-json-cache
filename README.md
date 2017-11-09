@@ -7,25 +7,28 @@
 [![Latest Unstable Version](https://poser.pugx.org/infobiotech/php-json-cache/v/unstable?format=flat-square)](https://packagist.org/packages/infobiotech/php-json-cache)
 [![Total Downloads](https://poser.pugx.org/infobiotech/php-json-cache/downloads?format=flat-square)](https://packagist.org/packages/infobiotech/php-json-cache)
 [![composer.lock](https://poser.pugx.org/infobiotech/php-json-cache/composerlock?format=flat-square)](https://packagist.org/packages/infobiotech/php-json-cache)
-[![Dependency Status](https://www.versioneye.com/user/projects/5a01c57d0fb24f14d7b411dd/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/5a01c57d0fb24f14d7b411dd)
 [![License](https://poser.pugx.org/infobiotech/php-json-cache/license?format=flat-square)](https://packagist.org/packages/infobiotech/php-json-cache)
 
 A key-value JSON-based PSR-16 cache implementation.
 
-Here our Quality Assurance indicators for `master` branch.
+Built with:
+* [PHP-FIG PSR-16](http://www.php-fig.org/psr/psr-16/): a common interface for caching libraries.
+* [Psr\SimpleCache](https://github.com/php-fig/simple-cache): a repository that holds all interfaces related to PSR-16.
+* [League\Flysystem](https://flysystem.thephpleague.com/): a filesystem abstraction that allows to easily swap out a local filesystem for a remote one.
+
+---
+
+Here our Quality Assurance indicators for `master` git branch.
 
 |              | build status | code coverage | code quality |
 | ------------ | ------------ | ------------- | ------------ |
 | Travis CI    | [![Build Status](https://travis-ci.org/infobiotech/php-json-cache.svg?branch=master&format=flat-square)](https://travis-ci.org/infobiotech/php-json-cache) | | |
 | CodeCov      |              | [![codecov](https://codecov.io/gh/infobiotech/php-json-cache/branch/master/graph/badge.svg)](https://codecov.io/gh/infobiotech/php-json-cache) | |
 | Scrutinizer  | [![Build Status](https://scrutinizer-ci.com/g/infobiotech/php-json-cache/badges/build.png?b=master)](https://scrutinizer-ci.com/g/infobiotech/php-json-cache/build-status/master) |               | [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/infobiotech/php-json-cache/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/infobiotech/php-json-cache/?branch=master) |
-| Code Climate |              | [![Test Coverage](https://api.codeclimate.com/v1/badges/15e7b0aa9a35fe0dfffe/test_coverage)](https://codeclimate.com/github/infobiotech/php-json-cache/test_coverage) | [![Maintainability](https://api.codeclimate.com/v1/badges/15e7b0aa9a35fe0dfffe/maintainability)](https://codeclimate.com/github/infobiotech/php-json-cache/maintainability) |
+| Code Climate |              |               | [![Maintainability](https://api.codeclimate.com/v1/badges/15e7b0aa9a35fe0dfffe/maintainability)](https://codeclimate.com/github/infobiotech/php-json-cache/maintainability) |
 | Codacy       |              | [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/446dcd15de1647aaa0af4e0ba0d9f021)](https://www.codacy.com/app/alessandroraffa/php-json-cache?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=infobiotech/php-json-cache&amp;utm_campaign=Badge_Coverage) | [![Codacy Badge](https://api.codacy.com/project/badge/Grade/446dcd15de1647aaa0af4e0ba0d9f021)](https://www.codacy.com/app/alessandroraffa/php-json-cache?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=infobiotech/php-json-cache&amp;utm_campaign=Badge_Grade) |
 
-Built with:
-* [PHP-FIG PSR-16](http://www.php-fig.org/psr/psr-16/): a common interface for caching libraries.
-* [Psr\SimpleCache](https://github.com/php-fig/simple-cache): a repository that holds all interfaces related to PSR-16.
-* [League\Flysystem](https://flysystem.thephpleague.com/): a filesystem abstraction that allows to easily swap out a local filesystem for a remote one.
+---
 
 ## Why JSON?
 
