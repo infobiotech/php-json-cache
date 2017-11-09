@@ -34,7 +34,7 @@ Built with:
 
 ### Prerequisites
 
-* PHP 5.6 or greater
+* PHP 5.6 or greater (including 7.0, 7.1 and [HHVM](https://hhvm.com/))
 
 ### Installing via composer
 
@@ -50,7 +50,7 @@ $ composer require infobiotech/php-json-cache
 
 **infobiotech/php-json-cache** implements [PSR-16](http://www.php-fig.org/psr/psr-16/) and thus provides a standardized API for storing and retrieving data.
 
-Here is a simple use case
+Here is a simple use case:
 
 ```php
 <?php
