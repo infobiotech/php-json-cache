@@ -63,7 +63,7 @@ class JsonCacheTest extends \PHPUnit\Framework\TestCase
         /*
          * Expecting an InvalidArgumentException
          */
-        $this->expectException('InvalidArgumentException');
+        $this->expectException('Infobiotech\\JsonCache\\Psr16\\InvalidArgumentException');
         $cache->set(null, static::TEST_STRING_VALUE);
     }
 
@@ -78,7 +78,7 @@ class JsonCacheTest extends \PHPUnit\Framework\TestCase
         /*
          * Expecting an InvalidArgumentException
          */
-        $this->expectException('InvalidArgumentException');
+        $this->expectException('Infobiotech\\JsonCache\\Psr16\\InvalidArgumentException');
         $cache->get(null);
     }
 
@@ -93,7 +93,7 @@ class JsonCacheTest extends \PHPUnit\Framework\TestCase
         /*
          * Expecting an InvalidArgumentException
          */
-        $this->expectException('InvalidArgumentException');
+        $this->expectException('Infobiotech\\JsonCache\\Psr16\\InvalidArgumentException');
         $cache->delete(null);
     }
 
@@ -108,7 +108,7 @@ class JsonCacheTest extends \PHPUnit\Framework\TestCase
         /*
          * Expecting an InvalidArgumentException
          */
-        $this->expectException('InvalidArgumentException');
+        $this->expectException('Infobiotech\\JsonCache\\Psr16\\InvalidArgumentException');
         $cache->getMultiple(null);
     }
 
@@ -123,7 +123,7 @@ class JsonCacheTest extends \PHPUnit\Framework\TestCase
         /*
          * Expecting an InvalidArgumentException
          */
-        $this->expectException('InvalidArgumentException');
+        $this->expectException('Infobiotech\\JsonCache\\Psr16\\InvalidArgumentException');
         $cache->setMultiple(null);
     }
 
@@ -138,7 +138,7 @@ class JsonCacheTest extends \PHPUnit\Framework\TestCase
         /*
          * Expecting an InvalidArgumentException
          */
-        $this->expectException('InvalidArgumentException');
+        $this->expectException('Infobiotech\\JsonCache\\Psr16\\InvalidArgumentException');
         $cache->deleteMultiple(null);
     }
 
@@ -153,7 +153,7 @@ class JsonCacheTest extends \PHPUnit\Framework\TestCase
         /*
          * Expecting an InvalidArgumentException
          */
-        $this->expectException('InvalidArgumentException');
+        $this->expectException('Infobiotech\\JsonCache\\Psr16\\InvalidArgumentException');
         $cache->has(null);
     }
 

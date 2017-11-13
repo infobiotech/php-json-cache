@@ -11,19 +11,17 @@
 namespace Infobiotech\JsonCache\Psr16;
 
 /** SPL use block. */
-use InvalidArgumentException as PhpInvalidArgumentException;
+use Exception;
 /** PSR-16 use block. */
 use Psr\SimpleCache\InvalidArgumentException as PsrInvalidArgumentException;
 
 /**
- * CacheInvalidArgumentException Class
+ * ArgumentException Class
  * Will be thrown if arguments given to caching functions are invalid or unacceptable.
  *
  * @author Alessandro Raffa, Infobiotech S.r.l. <a.raffa@infobiotech.net>
  */
-class InvalidArgumentException extends PhpInvalidArgumentException implements PsrInvalidArgumentException
+class InvalidArgumentException extends Exception implements PsrInvalidArgumentException
 {
-    /*
-     * No custom methods
-     */
+
 }
